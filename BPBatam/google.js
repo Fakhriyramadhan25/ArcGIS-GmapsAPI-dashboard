@@ -1,5 +1,5 @@
-function initialize() {
-  const berdiri = {lat: 1.130432 ,  lng: 104.053252 };
+function initialize(point = {lat: 1.130432 ,  lng: 104.053252 }) {
+  const berdiri = point;
   const map = new google.maps.Map(document.getElementById("map"), {
     center: berdiri,
     zoom: 14
@@ -16,4 +16,8 @@ function initialize() {
   );
   map.setStreetView(panorama);
 
+}
+
+function ubahStreetView(point){
+  initialize(point)
 }
