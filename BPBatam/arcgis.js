@@ -121,12 +121,19 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
             koor.innerHTML = titik;
         }
 
+        function getCoordinates (pt) {
+          return {lat: pt.latitude, lng: pt.longitude}
+      }
+
         view.watch(["stationary"], function(){
             showCoordinates(view.center);
         });
 
-        view.on(["pointer-down", "pointer-move"], function(evt){
+        view.on(["click"], function(evt){
+            console.log('click')
             showCoordinates(view.toMap({x: evt.x, y:evt.y}));
+            console.log(getCoordinates(view.toMap({x: evt.x, y:evt.y})))
+            ubahStreetView(getCoordinates(view.toMap({x: evt.x, y:evt.y})));
         });
 
         var koordinat = document.getElementById("latlong");
