@@ -19,20 +19,20 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
         container: "viewDiv",
         map: map,
         center: [104.053252, 1.130432],
-        zoom: 10,
+        zoom: 15,
         wkid: 4326
       });
 
       //popup atribut tabel
       var popupswp = {
         "title": "SWP Daerah",
-        "content": "<b>Nama:</b> {NAMOBJ}<br><b>Kode:</b> {FCODE}<br>"
+        "content": "<b>Nama:</b> {NAMOBJ}<br><b>Kode:</b> {FCODE}<br><b>Wilayah:</b> {REMARK}<br>"
       }
 
       // input feature layer untuk SWP (polygons)
       var swp = new FeatureLayer({
         url: "https://services8.arcgis.com/IZNPdYBN3NgLcqEF/arcgis/rest/services/Batas_Wilayah_Kerja/FeatureServer/0",
-        outFields:["NAMOBJ","FCODE"],
+        outFields:["NAMOBJ","FCODE", "REMARK"],
         popupTemplate: popupswp
         });
 
@@ -53,6 +53,26 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
 
       map.add(jalanbatam, 0);
 
+        //popup atribut tabel
+      var pophutan = {
+        "title": "Hutan SK282 2018",
+        "content": "<b>Kelas:</b> {kelas}<br><b>Luas:</b> {luas__ha_}<br>"
+      }
+
+      // input feature layer untuk Jalan Batam (polygons)
+      var hutan = new FeatureLayer({
+        url: "https://portallis.bpbatam.go.id/arcgis/rest/services/Hosted/HUTAN_SK272_18/FeatureServer/0",
+        outFields:["kelas","luas__ha_"],
+        popupTemplate: pophutan
+        });
+
+      map.add(hutan, 0);
+
+      view.map.layers.map(function(jalanbatam,swp){
+            jalanbatam.visible = false;
+            swp.visible = false;
+          });
+
         //Widget Basemap
         var basemapGallery = new BasemapGallery({
             view: view,
@@ -66,8 +86,6 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
                     }
                         });
 
-//        // Add to the view
-//        view.ui.add(basemapGallery, "top-right");
 
         //Add toggle down
         var basemapToggle = new BasemapToggle({
@@ -105,6 +123,10 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
         checkjalan.addEventListener("change",function(){
         jalanbatam.visible = checkjalan.checked;
         });
+        var checkhutan = document.getElementById("hutanlayer");
+        checkhutan.addEventListener("change",function(){
+        hutan.visible = checkhutan.checked;
+        });
 
 
         //buat widget koordinat koordinat
@@ -139,10 +161,7 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
         var koordinat = document.getElementById("latlong");
         koordinat.appendChild(koor);
 
-        //Konversi Koordinat
-        var convers = new CoordinateConversion({
-            view:view
-        });
-        view.ui.add(convers, "bottom-left"); })
+
+        })
 
 

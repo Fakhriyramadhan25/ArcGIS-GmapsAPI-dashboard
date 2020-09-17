@@ -9,7 +9,7 @@ html, body{
   #checkbox{
      position: absolute;
     top: 55px;
-    right: 51.5%;
+    right: 1.5%;
     font-size:12px;
     padding: 8px;
     background: white;
@@ -20,7 +20,7 @@ html, body{
   #latlong{
       position: absolute;
       bottom:8%;
-      left: 2%;
+      left: 52%;
       border-radius: 10px;
       padding: 8px;
       opacity: 0.8;
@@ -28,7 +28,7 @@ html, body{
       }
 
   #pano, #viewDiv  {
-      float: left;
+      float: right;
       height: 100%;
       width: 50%;
     }
