@@ -6,9 +6,11 @@ require([
       "esri/widgets/BasemapGallery",
       "esri/widgets/Search",
       "esri/views/SceneView",
-      "esri/widgets/CoordinateConversion"
+      "esri/widgets/CoordinateConversion",
+      "esri/widgets/Legend",
+      "esri/widgets/Expand"
     ],
-function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, SceneView, CoordinateConversion) {
+function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, SceneView, CoordinateConversion, Legend, Expand) {
 
       var map = new Map({
 //          topo-vector
@@ -160,6 +162,33 @@ function(Map, MapView, FeatureLayer,  BasemapToggle, BasemapGallery, Search, Sce
 
         var koordinat = document.getElementById("latlong");
         koordinat.appendChild(koor);
+
+//        var legend = new Legend({
+//            view:view,
+//            layerInfos: [{
+//                layer: hutan,
+//                title:"Keterangan"
+//            },
+//            {
+//                layer: jalanbatam,
+//                title: "Keterangan"
+//            },
+//            {
+//                layer: swp,
+//                title: "Keterangan"
+//            }]
+//        });
+
+        var keterangan = new Expand({
+        view: view,
+        content: new Legend({
+            view: view,
+            title: "Keterangan"}),
+        expanded: false,
+        label : "Legend"
+        });
+
+        view.ui.add(keterangan, "top-left");
 
 
         })

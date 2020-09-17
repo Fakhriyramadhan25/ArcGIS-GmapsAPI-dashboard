@@ -19,7 +19,7 @@ html, body{
 
   #latlong{
       position: absolute;
-      bottom:8%;
+      bottom:5%;
       left: 52%;
       border-radius: 10px;
       padding: 8px;
@@ -32,6 +32,13 @@ html, body{
       height: 100%;
       width: 50%;
     }
+
+#legend2 {
+    position: absolute;
+    top: 80px;
+    left: 2.5%;
+      }
+
 
 /*Mobile Mode*/
 
